@@ -1,11 +1,12 @@
 import sqlite3
 
 
-def insert(*, username: str, passwd: str, email: str):  # Insert values in database
+def insert(*, username: str, passwd: str, email: str, theme: str = 'dark'):  # Insert values in database
     db = sqlite3.connect('users.db')
     c = db.cursor()
 
-    c.execute(f"INSERT INTO 'users' (username, passwd, email) VALUES (?, ?, ?)", (username, passwd, email))
+    c.execute(f"INSERT INTO 'users' (username, passwd, email, theme) VALUES (?, ?, ?, ?)", (username, passwd, email,
+                                                                                            theme))
 
     db.commit()
     c.close()
