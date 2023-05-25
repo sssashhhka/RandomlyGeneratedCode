@@ -1,7 +1,7 @@
 import sqlite3
 
 
-def insert(*, username: str, passwd: str, email: str):
+def insert(*, username: str, passwd: str, email: str):  # Insert values in database
     db = sqlite3.connect('users.db')
     c = db.cursor()
 
@@ -11,7 +11,7 @@ def insert(*, username: str, passwd: str, email: str):
     c.close()
 
 
-def check(**parameters: str):
+def check(**parameters: str):  # Returns True if parameter's value exist
     db = sqlite3.connect('users.db')
     c = db.cursor()
     for parameter, invalue in parameters.items():
@@ -25,7 +25,26 @@ def check(**parameters: str):
     c.close()
 
 
-def update(*, user: str, **parameters: str):
+def get(username: str, *args: str):  # Returns list parameters
+    db = sqlite3.connect('users.db')
+    c = db.cursor()
+    parameters_list = []
+    for parameter in args:
+        try:
+            user = c.execute(f"SELECT {parameter} FROM users WHERE username = '{username}'")
+            value = user.fetchone()
+            try:
+                parameters_list.append(value[0])
+            except TypeError:
+                print(f'Bad username [{username}]')
+        except sqlite3.OperationalError:
+            print(f'Bad parameter name [{parameter}]')
+
+    c.close()
+    return parameters_list
+
+
+def update(*, user: str, **parameters: str):  # Updates values in database
     db = sqlite3.connect('users.db')
     c = db.cursor()
     c.execute(f"SELECT * FROM users WHERE username = '{user}'")
@@ -39,7 +58,7 @@ def update(*, user: str, **parameters: str):
     c.close()
 
 
-def delete(*, user: str):
+def delete(*, user: str):  # Delete values from database
     db = sqlite3.connect('users.db')
     c = db.cursor()
     c.execute(f"DELETE FROM users WHERE username = '{user}'")
