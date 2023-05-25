@@ -5,8 +5,10 @@ def insert(*, username: str, passwd: str, email: str, theme: str = 'dark'):  # I
     db = sqlite3.connect('users.db')
     c = db.cursor()
 
-    c.execute(f"INSERT INTO 'users' (username, passwd, email, theme) VALUES (?, ?, ?, ?)", (username, passwd, email,
-                                                                                            theme))
+    c.execute(f"UPDATE users SET 'isCurrent' = '0' WHERE isCurrent = '1'")
+    c.execute(f"INSERT INTO 'users' (username, passwd, email, theme, isCurrent) VALUES (?, ?, ?, ?, ?)", (username,
+                                                                                                          passwd, email,
+                                                                                                          theme, 1))
 
     db.commit()
     c.close()
