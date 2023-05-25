@@ -14,16 +14,28 @@ def insert(*, username: str, passwd: str, email: str, theme: str = 'dark'):  # I
     c.close()
 
 
-def check(**parameters: str):  # Returns True if parameter's value exist
+def check(*, return_param: str, **parameters: str):  # Returns parameter's value if another parameter's value exists
     db = sqlite3.connect('users.db')
     c = db.cursor()
-    for parameter, invalue in parameters.items():
-        user = c.execute(f"SELECT {parameter} FROM users")
-        value = user.fetchall()
-        if invalue == value[0][0]:
-            return True
-        elif invalue != value[0][0]:
-            pass
+    if return_param == 'Boolean':
+        for parameter, invalue in parameters.items():
+            user = c.execute(f"SELECT * FROM users WHERE {parameter} = '{invalue}'")
+            value = user.fetchone()
+            try:
+                if invalue in value:
+                    return True
+                else:
+                    pass
+            except TypeError:
+                return False
+    elif return_param != 'Boolean':
+        try:
+            for parameter, invalue in parameters.items():
+                user = c.execute(f"SELECT {return_param} FROM users WHERE {parameter} = '{invalue}'")
+                value = user.fetchall()
+                return value[0][0]
+        except IndexError:
+            return None
 
     c.close()
 
