@@ -30,15 +30,24 @@ class AccountSettings(gui.CTkToplevel):
         self.midLabel_font = gui.CTkFont(family='Segoe UI Variable', size=20, weight='normal')
         self.button_font = gui.CTkFont(family='Segoe UI Variable', size=15, weight='normal')
 
+        self.top_bar = gui.CTkFrame(self, corner_radius=0)
+        self.acc_username = gui.CTkLabel(self.top_bar, text=current_user, font=self.midLabel_font)
+
         self.account_delete = gui.CTkButton(self, text='Delete Account', fg_color='#ff4040',
                                             text_color='#000000', font=self.button_font,
                                             hover_color='#cc3333', border_width=2, border_color='#f75959',
                                             command=delete_account)
 
+        self.top_bar.grid(row=0, column=0, sticky='new')
+        self.acc_username.grid(row=0, column=0, padx=20, pady=10, sticky='nws')
+
         self.account_delete.grid(row=1, column=0, padx=10, pady=10, sticky='sew', columnspan=2)
 
         self.columnconfigure(0, weight=1)
         self.rowconfigure(1, weight=1)
+
+        self.top_bar.columnconfigure(0, weight=1)
+        self.top_bar.rowconfigure(0, weight=1)
 
 
 class MainWindow(gui.CTk):
