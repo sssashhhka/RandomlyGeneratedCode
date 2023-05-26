@@ -1,7 +1,7 @@
 import sqlite3
 
 
-def insert(*, username: str, passwd: str, email: str, theme: str = 'dark'):  # Insert values in database
+def insert(*, username: str, passwd: str, email: str, theme: str = 'Dark'):  # Insert values in database
     db = sqlite3.connect('users.db')
     c = db.cursor()
 
