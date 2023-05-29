@@ -1,6 +1,8 @@
 import customtkinter as gui
 import db_handler
 
+version = '0.1 Beta Build 1'
+
 current_user = db_handler.check(return_param='username', isCurrent='1')
 if current_user is None:
     from Sign_In_Window import startsi
@@ -64,6 +66,7 @@ class MainWindow(gui.CTk):
         self.title('Main Window')
         self.geometry('700x500')
 
+        self.version = gui.CTkLabel(self, text=f'Version: {version}', font=self.button_font, text_color='#444444')
         self.side_bar = gui.CTkFrame(self, corner_radius=0)
         self.menu = gui.CTkLabel(self.side_bar, text='Main menu', font=self.hiLabel_font)
 
@@ -79,7 +82,8 @@ class MainWindow(gui.CTk):
                                               variable=self.cur_theme, command=self.set_theme)
         self.exit_button = gui.CTkButton(self.side_bar, text='Exit', font=self.button_font, command=exit)
 
-        self.side_bar.grid(row=0, column=0, sticky='nws', rowspan=2)
+        self.version.grid(row=2, column=4, padx=10, pady=5, sticky='se')
+        self.side_bar.grid(row=0, column=0, sticky='nws', rowspan=4)
         self.menu.grid(row=0, column=0, padx=10, pady=10, sticky='new')
 
         self.acc_frame.grid(row=1, column=0, padx=10, pady=10, sticky='new')
@@ -95,7 +99,7 @@ class MainWindow(gui.CTk):
         self.rowconfigure(0, weight=1)
 
         self.side_bar.rowconfigure(0, weight=1)
-        self.side_bar.rowconfigure(1, weight=0)
+        self.side_bar.rowconfigure(1, weight=1)
 
         self.acc_frame.columnconfigure(0, weight=1)
 
