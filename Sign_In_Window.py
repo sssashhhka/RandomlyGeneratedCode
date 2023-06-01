@@ -1,6 +1,13 @@
 import customtkinter as gui
 import db_handler
 import passwd
+from assets.fonts import *
+
+
+def sign_up():
+    from Sign_Up_Window import start
+    app.withdraw()
+    start()
 
 
 class SignInWindow(gui.CTk):
@@ -11,18 +18,14 @@ class SignInWindow(gui.CTk):
         self.geometry('300x400')
         self.minsize(300, 400)
 
-        self.hiLabel_font = gui.CTkFont(family='Segoe UI Variable', size=25, weight='normal')
-        self.midLabel_font = gui.CTkFont(family='Segoe UI Variable', size=20, weight='normal')
-        self.button_font = gui.CTkFont(family='Segoe UI Variable', size=15, weight='normal')
-
-        self.label = gui.CTkLabel(self, text='Sign In', font=self.hiLabel_font)
-        self.login = gui.CTkEntry(self, placeholder_text='Username', font=self.button_font)
-        self.passwd = gui.CTkEntry(self, placeholder_text='Password', font=self.button_font)
-        self.sign_in = gui.CTkButton(self, text='Sign In', font=self.button_font, command=self.sign_in)
-        self.sign_up = gui.CTkButton(self, text='Sign Up', font=self.button_font)
-        self.exit = gui.CTkButton(self, text='Exit', font=self.button_font, command=exit)
+        self.label = gui.CTkLabel(self, text='Sign In', font=hi_label_font)
+        self.login = gui.CTkEntry(self, placeholder_text='Username', font=button_font)
+        self.passwd = gui.CTkEntry(self, placeholder_text='Password', font=button_font)
+        self.sign_in = gui.CTkButton(self, text='Sign In', font=button_font, command=self.sign_in)
+        self.sign_up = gui.CTkButton(self, text='Sign Up', font=button_font, command=sign_up)
+        self.exit = gui.CTkButton(self, text='Exit', font=button_font)
         self.info_frame = gui.CTkFrame(self, corner_radius=10)
-        self.info = gui.CTkLabel(self.info_frame, text='Sign in an existing account', font=self.button_font)
+        self.info = gui.CTkLabel(self.info_frame, text='Sign in an existing account', font=button_font)
 
         self.label.grid(row=0, column=0, padx=10, pady=10, sticky='new')
         self.login.grid(row=1, column=0, padx=10, pady=(10, 5), sticky='new')
@@ -46,8 +49,8 @@ class SignInWindow(gui.CTk):
                                                                                                 passwd=hash_pass):
                 db_handler.update(user=username, isCurrent='1')
                 self.withdraw()
-                import Main_Window
-                Main_Window.startmw()
+                from Main_Window import start
+                start()
             else:
                 self.info.configure(text='Incorrect username or password!')
         else:

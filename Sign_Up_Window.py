@@ -3,6 +3,7 @@ import customtkinter as gui
 import smtplib
 import db_handler
 import passwd
+from assets.fonts import *
 
 
 class SignUpWindow(gui.CTk):
@@ -13,21 +14,17 @@ class SignUpWindow(gui.CTk):
         self.title('Sign Up')
         self.geometry('300x400')
 
-        self.hiLabel_font = gui.CTkFont(family='Segoe UI Variable', size=25, weight='normal')
-        self.midLabel_font = gui.CTkFont(family='Segoe UI Variable', size=20, weight='normal')
-        self.button_font = gui.CTkFont(family='Segoe UI Variable', size=15, weight='normal')
+        self.label = gui.CTkLabel(self, text='Sign Up', font=hi_label_font)
 
-        self.label = gui.CTkLabel(self, text='Sign Up', font=self.hiLabel_font)
-
-        self.username_entry = gui.CTkEntry(self, placeholder_text='Username', font=self.button_font)
-        self.passwd_entry = gui.CTkEntry(self, placeholder_text='Password', font=self.button_font)
-        self.email_entry = gui.CTkEntry(self, placeholder_text='Email', font=self.button_font)
-        self.sec_code_entry = gui.CTkEntry(self, placeholder_text='Secure code', font=self.button_font)
-        self.next_button = gui.CTkButton(self, text='Next', font=self.button_font, command=self.check)
+        self.username_entry = gui.CTkEntry(self, placeholder_text='Username', font=button_font)
+        self.passwd_entry = gui.CTkEntry(self, placeholder_text='Password', font=button_font)
+        self.email_entry = gui.CTkEntry(self, placeholder_text='Email', font=button_font)
+        self.sec_code_entry = gui.CTkEntry(self, placeholder_text='Secure code', font=button_font)
+        self.next_button = gui.CTkButton(self, text='Next', font=button_font, command=self.check)
         self.info_frame = gui.CTkFrame(self, corner_radius=10)
-        self.info = gui.CTkLabel(self.info_frame, text='sign up window v0.1b build 1', font=self.button_font,
+        self.info = gui.CTkLabel(self.info_frame, text='sign up window v0.1b build 1', font=button_font,
                                  text_color='#444444')
-        self.exit_button = gui.CTkButton(self, text='Exit', font=self.button_font, command=exit)
+        self.exit_button = gui.CTkButton(self, text='Exit', font=button_font, command=exit)
 
         self.label.grid(row=0, column=0, padx=10, pady=10, sticky='new')
         self.username_entry.grid(row=1, column=0, padx=10, pady=(10, 5), sticky='new')
@@ -90,10 +87,14 @@ class SignUpWindow(gui.CTk):
             db_handler.insert(username=self.username_entry.get(), passwd=password,
                               email=self.email_entry.get())
             self.withdraw()
-            from Main_Window import startmw
-            startmw()
+            from Main_Window import start
+            start()
         else:
             self.info.configure(text='Invalid secure code!', text_color='#ed5151')
+
+
+def start():
+    app.mainloop()
 
 
 app = SignUpWindow()
