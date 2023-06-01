@@ -1,6 +1,5 @@
 import customtkinter as gui
-import db_handler
-import passwd
+from utility import passwd, db_handler
 from assets.fonts import *
 
 

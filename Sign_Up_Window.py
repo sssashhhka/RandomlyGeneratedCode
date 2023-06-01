@@ -1,8 +1,7 @@
 import random
 import customtkinter as gui
 import smtplib
-import db_handler
-import passwd
+from utility import passwd, db_handler
 from assets.fonts import *
 
 

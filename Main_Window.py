@@ -1,5 +1,5 @@
 import customtkinter as gui
-import db_handler
+from utility import db_handler
 from assets.fonts import *
 
 version = '0.2 Beta Build 4'
