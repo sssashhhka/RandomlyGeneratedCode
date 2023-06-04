@@ -3,11 +3,11 @@ import sqlite3
 
 def init():
     try:
-        db = sqlite3.connect("../databases/users.db")
+        db = sqlite3.connect("databases/users.db")
         c = db.cursor()
         c.execute("SELECT * FROM USERS")
     except sqlite3.OperationalError:
-        db = sqlite3.connect("../databases/users.db")
+        db = sqlite3.connect("databases/users.db")
         c = db.cursor()
         c.execute("""CREATE TABLE users (
             username TEXT,
@@ -22,7 +22,7 @@ def init():
 
 
 def insert(*, username: str, passwd: str, email: str, theme: str = 'Dark', clrtheme: str = 'dark-blue'):
-    db = sqlite3.connect('../databases/users.db')
+    db = sqlite3.connect('databases/users.db')
     c = db.cursor()
 
     c.execute(f"UPDATE users SET 'isCurrent' = '0' WHERE isCurrent = '1'")
@@ -34,7 +34,7 @@ def insert(*, username: str, passwd: str, email: str, theme: str = 'Dark', clrth
 
 
 def check(*, return_param: str, **parameters: str):
-    db = sqlite3.connect('../databases/users.db')
+    db = sqlite3.connect('databases/users.db')
     c = db.cursor()
     if return_param == 'Boolean':
         for parameter, invalue in parameters.items():
@@ -60,7 +60,7 @@ def check(*, return_param: str, **parameters: str):
 
 
 def get(username: str, *args: str):
-    db = sqlite3.connect("../databases/users.db")
+    db = sqlite3.connect("databases/users.db")
     c = db.cursor()
     parameters_list = []
     for parameter in args:
@@ -78,7 +78,7 @@ def get(username: str, *args: str):
 
 
 def update(*, user: str, **parameters: str):
-    db = sqlite3.connect('../databases/users.db')
+    db = sqlite3.connect('databases/users.db')
     c = db.cursor()
     c.execute(f"SELECT * FROM users WHERE username = '{user}'")
     for parameter, value in parameters.items():
@@ -92,7 +92,7 @@ def update(*, user: str, **parameters: str):
 
 
 def delete(*, user: str):
-    db = sqlite3.connect('../databases/users.db')
+    db = sqlite3.connect('databases/users.db')
     c = db.cursor()
     c.execute(f"DELETE FROM users WHERE username = '{user}'")
     db.commit()
