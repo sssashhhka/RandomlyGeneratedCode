@@ -14,7 +14,6 @@ class SignUpWindow(gui.CTk):
         self.geometry('300x400')
 
         self.label = gui.CTkLabel(self, text='Sign Up', font=hi_label_font)
-
         self.username_entry = gui.CTkEntry(self, placeholder_text='Username', font=button_font)
         self.passwd_entry = gui.CTkEntry(self, placeholder_text='Password', font=button_font)
         self.email_entry = gui.CTkEntry(self, placeholder_text='Email', font=button_font)

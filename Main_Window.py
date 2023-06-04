@@ -74,14 +74,12 @@ class MainWindow(gui.CTk):
         self.version = gui.CTkLabel(self, text=f'Version: {version}', font=button_font, text_color='#444444')
         self.side_bar = gui.CTkFrame(self, corner_radius=0)
         self.menu = gui.CTkLabel(self.side_bar, text='Main menu', font=hi_label_font)
-
         self.acc_frame = gui.CTkFrame(self.side_bar, corner_radius=10)
         self.acc_username = gui.CTkLabel(self.acc_frame, text=current_user, font=mid_label_font)
         self.acc_settings = gui.CTkButton(self.acc_frame, text='Account settings', font=button_font,
                                           command=self.open_profile)
         self.sign_out_button = gui.CTkButton(self.acc_frame, text='Sign Out', font=button_font,
                                              command=self.sign_out)
-
         self.theme_info = gui.CTkLabel(self.side_bar, text='Theme settings:', font=button_font)
         self.theme_picker = gui.CTkOptionMenu(self.side_bar, values=['Dark', 'Light'], font=button_font,
                                               variable=self.cur_theme, command=self.set_theme)
