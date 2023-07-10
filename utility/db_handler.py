@@ -2,7 +2,7 @@ import sqlite3
 import time
 import os
 
-version: str = f"OS: [{os.name}] db_handler v.1.0_rc (release candidate)"
+version: str = "db_handler v.1.0_rc (release candidate)"
 
 
 def log_print(info: str, state: int = 0):
